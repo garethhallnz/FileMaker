@@ -728,7 +728,12 @@ class FileMaker
             if (($value !== true) && strtolower($this->getProperty('charset')) !== 'utf-8') {
                 $value = utf8_encode($value);
             }
-            $restParams[] = urlencode($option) . ($value === true ? '' : '=' . urlencode($value));
+            if (strpos($option, '_noencode')) {
+                $option = str_replace('_noencode', $option);
+                $restParams[] = urlencode($option) . ($value === true ? '' : '=' . $value);
+            } else {
+                $restParams[] = urlencode($option) . ($value === true ? '' : '=' . urlencode($value));
+            }
         }
 
         $host = $this->getProperty('hostspec');
