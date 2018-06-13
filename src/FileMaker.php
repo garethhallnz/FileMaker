@@ -729,7 +729,7 @@ class FileMaker
                 $value = utf8_encode($value);
             }
             if (strpos($option, '_noencode')) {
-                $option = str_replace('_noencode', $option);
+                $option = str_replace('_noencode', "", $option);
                 $restParams[] = urlencode($option) . ($value === true ? '' : '=' . $value);
             } else {
                 $restParams[] = urlencode($option) . ($value === true ? '' : '=' . urlencode($value));
